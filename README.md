@@ -8,7 +8,6 @@ Telegram community join funnel.
 | File | Kaam |
 |---|---|
 | `index.html` | **Main landing page** (HTML + CSS + JS sab ek hi file me) |
-| `META-POLICY-GUIDE.md` | Meta ads policy guide (Hinglish) — ads reject hone se bachne ke liye |
 | `README.md` | Ye file |
 
 ## ⚡ Setup
@@ -71,9 +70,3 @@ Naye campaign ke liye counting reset karni ho to `index.html` me
 - ✅ "Aaj ka offer" countdown timer (urgency ke liye)
 - ✅ Fast loading — koi framework nahi, ek hi HTML file
 - ✅ Landscape phones ke liye 2-column layout
-
-## ⚠️ Important
-
-Ads chalane se pehle **`META-POLICY-GUIDE.md` zaroor padh lena** — usme bataya hai:
-kya likhna chahiye/kya nahi, Meta Pixel setup, reject hone par kya karna hai,
-aur safe ad copy examples.
