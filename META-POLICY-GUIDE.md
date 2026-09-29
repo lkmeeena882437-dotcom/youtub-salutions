@@ -148,6 +148,19 @@ Agar aapki service **bots / fake accounts / purchased engagement** se related ha
 | `Lead` | Telegram button click | **Optimization** ke liye main event |
 | `TelegramJoinClick` (custom) | Telegram button click | Detailed analysis |
 
+### 🛡️ Double-tracking protection (already coded):
+- `Lead` event **ek user par sirf 1 baar** fire hota hai (localStorage flag `tg_lead_v1`),
+  chahe user button kitni baar bhi click kare ya page baar-baar khole — numbers inflate nahi honge
+- Naye campaign ke liye counting RESET: `index.html` me `'tg_lead_v1'` → `'tg_lead_v2'`
+
+### 📌 Actual Telegram joins verify karna (zaroori):
+Pixel `Lead` = **join button ka CLICK**, actual join nahi (user click karke
+Telegram khole par join na bhi kare). Actual numbers ke liye:
+1. **Alag invite link** sirf ads ke liye banao (Telegram channel → Invite Links → Create Link)
+2. Telegram har link ka **join stats** dikhata hai → wo hai aapka "actual subscribers from ads"
+3. Cost per subscriber = `Ad spend ÷ Telegram link joins`
+4. (Advanced) Welcome **bot** se puch sakte ho "Where did you find us?" — 100% accurate
+
 ### Optimization tips:
 - Campaign objective: **Leads** (ya shuru me **Landing Page Views / Link Clicks**)
 - `Lead` event par optimize karne ke liye Meta ko **~50 events/week** chahiye —
