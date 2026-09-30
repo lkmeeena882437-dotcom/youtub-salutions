@@ -1,35 +1,23 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <!-- ===================================================================
-       HIGH CONVERTING LANDING PAGE — YouTube & Facebook Page Growth
-       Meta Ads ke liye | Telegram Join funnel | Single screen (no scroll)
 
-       ⚡ 2 CHEEZEIN AAPKO BADALNI HAIN:
-       1) TELEGRAM LINK  → search "t.me/"  (CTA button ka href)
-       2) META PIXEL ID  → search "META_PIXEL_ID" (niche script me)
-       =================================================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>YouTube &amp; Facebook Page Full Growth + Monetization Pack | ₹150 Today Offer</title>
-  <meta name="description" content="YouTube और Facebook Page Growth + Monetization Pack — सिर्फ ₹150. 3K Subscribers, 4K Watch Time, 5M Views, 24×7 Telegram Support. Free Telegram Community join करें.">
+  <title>YouTube &amp; Facebook Creators | Free Community &amp; Support Hub</title>
+  <meta name="description" content="Free independent creator community for YouTube and Facebook creators. Get algorithm updates, content strategies, creator discussions and practical support.">
   <meta name="theme-color" content="#0c0720">
 
-  <!-- Open Graph (share पर अच्छा दिखे) -->
-  <meta property="og:title" content="YouTube &amp; Facebook Page Growth + Monetization Pack — ₹150">
-  <meta property="og:description" content="3K Subscribers • 4K Watch Time • 5M Views • 24×7 Support. Free Telegram Community join करें!">
+  <meta property="og:title" content="YouTube &amp; Facebook Creators | Free Community &amp; Support Hub">
+  <meta property="og:description" content="Algorithm updates, content strategies and creator support. Join our independent free community.">
   <meta property="og:type" content="website">
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff3b30'/%3E%3Cpolygon points='26,18 48,32 26,46' fill='white'/%3E%3C/svg%3E">
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ================= BASE ================= */
+
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { margin: 0; padding: 0; height: 100%; }
     body {
@@ -37,12 +25,11 @@
       background: #0c0720;
       color: #fff;
       height: 100dvh;
-      overflow: hidden;               /* single screen — no scrolling */
+      overflow: hidden;
       overscroll-behavior: none;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ================= BACKGROUND ================= */
     .bg {
       position: fixed; inset: 0; z-index: -1;
       background:
@@ -61,7 +48,6 @@
       50%      { transform: translate3d(14px, 18px, 0) scale(1.08); }
     }
 
-    /* ================= LAYOUT (single screen) ================= */
     .hero {
       height: 100dvh;
       max-width: 560px;
@@ -74,22 +60,16 @@
     }
     .col { display: flex; flex-direction: column; gap: clamp(8px, 1.6vh, 16px); min-height: 0; }
 
-    /* ================= HEADER / BADGE ================= */
     .top { display: flex; justify-content: center; }
-    .badge-offer {
+    .badge-community {
       display: inline-flex; align-items: center; gap: 7px;
-      background: linear-gradient(92deg, #ff2d55, #ff7a1a);
+      background: rgba(42, 171, 238, .14);
+      border: 1px solid rgba(127, 215, 255, .30);
       padding: 7px 18px; border-radius: 999px;
-      font-size: clamp(11px, 2.8vw, 13.5px); font-weight: 700; letter-spacing: 1.2px;
-      box-shadow: 0 8px 26px rgba(255, 60, 60, .4);
-      animation: badgePulse 2.2s ease-in-out infinite;
-    }
-    @keyframes badgePulse {
-      0%, 100% { box-shadow: 0 8px 26px rgba(255, 60, 60, .40); }
-      50%      { box-shadow: 0 10px 34px rgba(255, 60, 60, .65); }
+      font-size: clamp(11px, 2.8vw, 13.5px); font-weight: 700; letter-spacing: 1px;
+      color: #b9edff;
     }
 
-    /* ================= HEADLINE ================= */
     .headline { text-align: center; }
     .headline h1 {
       margin: 0;
@@ -107,60 +87,53 @@
       color: rgba(255,255,255,.82); font-weight: 500;
     }
 
-    /* ================= OFFER CARD ================= */
-    .offer-card {
+    .benefits-card {
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.13);
       border-radius: 20px;
-      padding: clamp(12px, 2.2vh, 18px) clamp(12px, 3.5vw, 18px);
+      padding: clamp(13px, 2.3vh, 19px) clamp(12px, 3.5vw, 18px);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 18px 44px rgba(0,0,0,.32);
     }
-    .price-row {
-      display: flex; align-items: center; gap: 13px;
-      padding-bottom: clamp(8px, 1.6vh, 13px);
-      border-bottom: 1px dashed rgba(255,255,255,.16);
+    .benefits-heading {
+      margin: 0;
+      font-size: clamp(13px, 3.4vw, 16px);
+      font-weight: 700;
+      color: #fff;
     }
-    .price {
-      font-size: clamp(30px, 8.6vw, 44px); font-weight: 800; line-height: 1;
-      background: linear-gradient(92deg, #ffd76a, #ff9d3c);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
+    .benefits-intro {
+      margin: 4px 0 0;
+      font-size: clamp(10px, 2.5vw, 12px);
+      color: rgba(255,255,255,.62);
     }
-    .price-info b { display: block; font-size: clamp(11.5px, 3vw, 14px); letter-spacing: .8px; }
-    .price-info small {
-      display: inline-block; margin-top: 3px;
-      font-size: clamp(9.5px, 2.4vw, 11px); color: rgba(255,255,255,.65);
-    }
-    .tag-mini {
-      display: inline-block; margin-left: 6px;
-      background: rgba(255, 45, 85, .22); color: #ff8fa3;
-      border: 1px solid rgba(255, 45, 85, .35);
-      padding: 1px 8px; border-radius: 999px;
-      font-size: 9.5px; font-weight: 700; letter-spacing: .5px;
-    }
-    .offer-grid {
+    .benefits-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(6px, 1.3vh, 9px);
-      margin-top: clamp(9px, 1.8vh, 14px);
+      gap: clamp(7px, 1.4vh, 10px);
+      margin-top: clamp(10px, 1.9vh, 14px);
     }
-    .chip {
-      display: flex; align-items: center; gap: 7px;
+    .benefit {
+      display: flex; align-items: flex-start; gap: 8px;
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.10);
       border-radius: 12px;
-      padding: clamp(7px, 1.5vh, 11px) 10px;
-      font-size: clamp(10.5px, 2.8vw, 13px); font-weight: 600;
+      padding: clamp(8px, 1.6vh, 11px) 10px;
+      font-size: clamp(10px, 2.65vw, 12.5px);
     }
-    .chip .ck {
+    .benefit .ck {
       flex: 0 0 auto;
       width: 17px; height: 17px; border-radius: 50%;
       background: linear-gradient(135deg, #22e07a, #12b866);
       display: inline-flex; align-items: center; justify-content: center;
       font-size: 10px; color: #062; font-weight: 800;
     }
-    .chip small { display: block; font-size: 8.8px; color: rgba(255,255,255,.55); font-weight: 500; }
+    .benefit-text { display: block; line-height: 1.3; }
+    .benefit-text b { display: block; font-weight: 700; }
+    .benefit-text small {
+      display: block; margin-top: 3px;
+      font-size: clamp(8.5px, 2.15vw, 10px);
+      color: rgba(255,255,255,.57); line-height: 1.3;
+    }
 
-    /* ================= TICKER ================= */
     .ticker {
       text-align: center;
       min-height: 22px;
@@ -169,19 +142,6 @@
     }
     .ticker span { transition: opacity .45s ease; }
 
-    /* ================= COUNTDOWN ================= */
-    .countdown {
-      text-align: center;
-      font-size: clamp(10.5px, 2.7vw, 12.5px);
-      color: rgba(255,255,255,.78); font-weight: 500;
-    }
-    .countdown b {
-      color: #ff8fa3; font-variant-numeric: tabular-nums;
-      background: rgba(255,45,85,.14); border: 1px solid rgba(255,45,85,.28);
-      padding: 2px 9px; border-radius: 8px; margin-left: 5px;
-    }
-
-    /* ================= CTA ================= */
     .cta {
       display: flex; align-items: center; justify-content: center; gap: 11px;
       width: 100%;
@@ -200,13 +160,26 @@
       0%, 100% { box-shadow: 0 12px 34px rgba(42,171,238,.42), inset 0 1px 0 rgba(255,255,255,.35); }
       50%      { box-shadow: 0 14px 46px rgba(42,171,238,.68), inset 0 1px 0 rgba(255,255,255,.35); }
     }
-    .cta svg { flex: 0 0 auto; }
     .cta-sub {
       margin: 0; text-align: center;
       font-size: clamp(9.5px, 2.5vw, 11.5px); color: rgba(255,255,255,.62); font-weight: 500;
     }
+    .ad-credit {
+      align-self: center;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 5px; width: fit-content;
+      padding: 5px 11px; border-radius: 999px;
+      color: #ffffff;
+      background: rgba(42,171,238,.16);
+      border: 1px solid rgba(127,215,255,.42);
+      box-shadow: 0 5px 18px rgba(42,171,238,.18);
+      font-size: clamp(9px, 2.35vw, 11px);
+      text-decoration: none;
+      transition: background .15s ease, color .15s ease;
+    }
+    .ad-credit strong { color: #ffd76a; font-weight: 800; }
+    .ad-credit:hover { color: #fff; background: rgba(42,171,238,.28); }
 
-    /* ================= FOOTER / LEGAL ================= */
     .legal {
       display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: center;
     }
@@ -223,7 +196,6 @@
       line-height: 1.5;
     }
 
-    /* ================= MODALS ================= */
     .modal {
       position: fixed; inset: 0; z-index: 60;
       background: rgba(8, 4, 22, .72);
@@ -262,7 +234,6 @@
       font-size: 15px; line-height: 1;
     }
 
-    /* ================= SHORT SCREENS (landscape phones) ================= */
     @media (max-height: 560px) and (orientation: landscape) {
       .hero {
         flex-direction: row; max-width: 960px;
@@ -274,7 +245,6 @@
       .cta { padding: 12px 14px; font-size: 15px; }
     }
 
-    /* ================= REDUCED MOTION ================= */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -282,20 +252,11 @@
 </head>
 <body>
 
-  <!-- ===== META (FACEBOOK) PIXEL — यहाँ अपनी Pixel ID डालें ===== -->
   <script>
-    /* ============================================================
-       ⚡ META PIXEL SETUP:
-       नीचे 'PASTE_PIXEL_ID_HERE' को अपनी Pixel ID से बदलें.
-       Pixel ID कहाँ मिलेगी: events.facebook.com → Data Sources → Pixels
-       Example ID ऐसी दिखती है: 123456789012345
-       ID डालने के बाद यह page open करें + "Meta Pixel Helper"
-       extension से check करें कि PageView fire हो रहा है.
-       ============================================================ */
+
     const META_PIXEL_ID = '1089305817042982';
 
     (function () {
-      // fbq stub — ताकि Pixel ID न होने पर भी page की कोई error न आए
       if (!window.fbq) {
         var n = window.fbq = function () {
           n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
@@ -304,10 +265,7 @@
         n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
       }
       var isReal = META_PIXEL_ID && META_PIXEL_ID.indexOf('PASTE') === -1 && META_PIXEL_ID.length > 5;
-      if (!isReal) {
-        console.warn('[Meta Pixel] Abhi Pixel ID nahi dali gayi — META_PIXEL_ID me apni ID paste karein.');
-        return;
-      }
+      if (!isReal) return;
       var t = document.createElement('script');
       t.async = true;
       t.src = 'https://connect.facebook.net/en_US/fbevents.js';
@@ -319,7 +277,7 @@
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=PASTE_PIXEL_ID_HERE&ev=PageView&noscript=1" />
+         src="https://www.facebook.com/tr?id=1089305817042982&ev=PageView&noscript=1" />
   </noscript>
 
   <div class="bg"></div>
@@ -328,56 +286,44 @@
 
   <main class="hero">
 
-    <!-- ============ TOP COLUMN ============ -->
     <div class="col col-top">
 
       <div class="top">
-        <div class="badge-offer">🔥 TODAY OFFER</div>
+        <div class="badge-community">✦ FREE CREATOR COMMUNITY</div>
       </div>
 
       <div class="headline">
-        <h1>YouTube और Facebook Page<br><span class="grad">Full Growth + Monetization</span></h1>
-        <p class="sub">🎯 आज का स्पेशल ऑफर — सिर्फ ₹150 में &nbsp;•&nbsp; सीखें | बढ़ें | कमाएँ</p>
+        <h1>YouTube &amp; Facebook Creators ke liye<br><span class="grad">Free Community &amp; Support Hub</span></h1>
+        <p class="sub">Algorithm updates, content strategies aur creators ke saath milkar grow karne ka rasta.</p>
       </div>
 
-      <section class="offer-card" aria-label="Today's offer">
-        <div class="price-row">
-          <div class="price">₹150</div>
-          <div class="price-info">
-            <b>FULL MONETIZE PRICE</b>
-            <small>One-time • Telegram पर पूरी मदद</small>
-            <span class="tag-mini">LIMITED</span>
-          </div>
-        </div>
-        <div class="offer-grid">
-          <div class="chip"><span class="ck">✓</span><span>3K Subscribers</span></div>
-          <div class="chip"><span class="ck">✓</span><span>4K Watch Time</span></div>
-          <div class="chip"><span class="ck">✓</span><span>5 Million Views</span></div>
-          <div class="chip"><span class="ck">✓</span><span>24×7 Chat Support<small>Monetize होने तक</small></span></div>
+      <section class="benefits-card" aria-label="Creator support benefits">
+        <h2 class="benefits-heading">What’s Inside</h2>
+        <p class="benefits-intro">Practical learning, discussion aur independent creator support.</p>
+        <div class="benefits-grid">
+          <div class="benefit"><span class="ck">✓</span><span class="benefit-text"><b>Latest Algorithm Updates</b><small>Roz ke naye changes ki jankari</small></span></div>
+          <div class="benefit"><span class="ck">✓</span><span class="benefit-text"><b>Content &amp; Video Tips</b><small>Content ko better banane ke practical tareeqe</small></span></div>
+          <div class="benefit"><span class="ck">✓</span><span class="benefit-text"><b>Creator Networking</b><small>Doosre creators ke saath discussion aur support</small></span></div>
+          <div class="benefit"><span class="ck">✓</span><span class="benefit-text"><b>Community Chat Support</b><small>Apne sawaal community mein poochne ka mauka</small></span></div>
         </div>
       </section>
 
     </div>
 
-    <!-- ============ BOTTOM COLUMN ============ -->
     <div class="col col-bottom">
 
-      <div class="ticker"><span id="tickerText">✅ YouTube Subscribers बढ़ाने के Tips</span></div>
+      <div class="ticker"><span id="tickerText">✅ Daily Growth Tips &amp; Strategies</span></div>
 
-      <div class="countdown">⏰ आज का ऑफर समाप्त होने में:<b id="cd">00:00:00</b></div>
-
-      <!-- ⚡ TELEGRAM CHANNEL LINK (agar badalna ho to yahan) -->
       <a class="cta" id="telegramBtn"
          href="https://t.me/+nZRxaOOdx2ozMGE1"
          target="_blank" rel="noopener noreferrer"
          data-fb-event="Lead">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
-          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-        </svg>
         JOIN FREE TELEGRAM COMMUNITY
       </a>
 
-      <p class="cta-sub">✅ Free to Join &nbsp;•&nbsp; ✅ Instant Access &nbsp;•&nbsp; ✅ 24×7 Support</p>
+      <p class="cta-sub">✅ Free to Join &nbsp;•&nbsp; ✅ Instant Access &nbsp;•&nbsp; ✅ Creator Discussions</p>
+
+      <a class="ad-credit" href="https://t.me/adstele_agency" target="_blank" rel="noopener noreferrer">Advertising by <strong>@adstele_agency</strong></a>
 
       <div>
         <div class="legal">
@@ -385,13 +331,12 @@
           <button type="button" data-modal="modalTerms">Terms &amp; Conditions</button>
           <button type="button" data-modal="modalDisclaimer">Disclaimer</button>
         </div>
-        <p class="micro">🔒 हम आपका कभी Password / OTP नहीं माँगते &nbsp;•&nbsp; Not affiliated with YouTube, Meta or Telegram.</p>
+        <p class="micro">🔒 हम आपका कभी Password / OTP नहीं माँगते &nbsp;•&nbsp; Independent community, not affiliated with YouTube, Meta or Telegram.</p>
       </div>
 
     </div>
   </main>
 
-  <!-- ================= MODAL: PRIVACY POLICY ================= -->
   <div class="modal" id="modalPrivacy" role="dialog" aria-modal="true" aria-label="Privacy Policy">
     <div class="modal-card">
       <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
@@ -436,11 +381,10 @@
       <p>We may update this Privacy Policy from time to time. The latest version will always be published on this page.</p>
 
       <h4>11. Contact Us</h4>
-      <p>If you have any questions about this Privacy Policy, please contact the administrator of our Telegram community, or e-mail us at <b>[your-email@example.com]</b> — please replace this with your real e-mail address.</p>
+      <p>If you have any questions about this Privacy Policy, please contact the administrator through the Telegram community.</p>
     </div>
   </div>
 
-  <!-- ================= MODAL: TERMS & CONDITIONS ================= -->
   <div class="modal" id="modalTerms" role="dialog" aria-modal="true" aria-label="Terms and Conditions">
     <div class="modal-card">
       <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
@@ -449,10 +393,10 @@
       <p>Please read these Terms &amp; Conditions carefully. By using this page and our services, you agree to be bound by them.</p>
 
       <h4>1. Description of the Service</h4>
-      <p>We provide <b>growth guidance, tutorials, tips, tools, support, and consultation</b> for YouTube creators and Facebook Page owners. Our ₹150 "Full Monetize Pack" is a growth-guidance and support package, which includes chat support until the channel is monetised.</p>
+      <p>We provide an <b>independent creator community</b> with educational discussions, content ideas, platform updates, practical tips, and peer support for YouTube creators and Facebook Page owners. The community is not an official service of YouTube, Facebook, Meta, or Telegram.</p>
 
       <h4>2. No Guarantee of Results</h4>
-      <p>The figures shown in the package (for example, 3K Subscribers, 4K Watch Time, 5M Views) are package targets and components. Actual results depend on the quality of your content, your niche, your consistency, your audience, and your own effort. <b>We do not guarantee any specific figure or monetisation approval</b> — approval rests entirely with YouTube/Facebook and their own policies and decisions.</p>
+      <p>Our information is general guidance only. We do not guarantee any specific result, including views, subscribers, reach, engagement, platform approval, or audience growth. Results depend on your content, niche, consistency, audience, and your own decisions. You are responsible for checking the latest rules of each platform.</p>
 
       <h4>3. User Responsibilities</h4>
       <ul>
@@ -468,14 +412,14 @@
         <li>The administrator's decision is final in all community matters</li>
       </ul>
 
-      <h4>5. Payments &amp; Refunds</h4>
-      <p>This is a digital service. Once payment has been made, access to the Telegram community is provided. Refunds are generally not available after access has been granted; in exceptional circumstances, any refund is at the administrator's discretion. Please keep a record of your payment.</p>
+      <h4>5. Community Access</h4>
+      <p>This page provides access to a free Telegram creator community. Telegram manages the account, login, and platform experience under its own terms. We will never ask for your YouTube, Google, Facebook, or Telegram password, OTP, PIN, or two-factor authentication code.</p>
 
       <h4>6. Intellectual Property</h4>
-      <p>Our tutorials, guides, text, logo, and other content may not be copied or resold without written permission. The logos and names of YouTube, Facebook, Meta, and Telegram are the property of their respective companies.</p>
+      <p>Our tutorials, guides, text, and other original content may not be copied or resold without written permission. The logos and names of YouTube, Facebook, Meta, and Telegram belong to their respective companies.</p>
 
       <h4>7. Limitation of Liability</h4>
-      <p>We shall not be liable for any loss arising from the use of our guidance — including channel strikes, demonetisation, or platform penalties. Platform policies may change at any time, which may affect results.</p>
+      <p>We are not liable for losses arising from the use of general community guidance, third-party links, or changes to platform rules. You decide how to apply any information shared in the community.</p>
 
       <h4>8. Governing Law</h4>
       <p>These Terms are governed by the laws of India, and the courts of India shall have exclusive jurisdiction over any dispute arising out of them.</p>
@@ -485,7 +429,6 @@
     </div>
   </div>
 
-  <!-- ================= MODAL: DISCLAIMER ================= -->
   <div class="modal" id="modalDisclaimer" role="dialog" aria-modal="true" aria-label="Disclaimer">
     <div class="modal-card">
       <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
@@ -504,28 +447,26 @@
       <h4>4. External Links</h4>
       <p>Third-party links on this page (such as Telegram) lead to platforms that are responsible for their own content and policies.</p>
 
-      <h4>5. Meta Advertising Standards</h4>
-      <p>This page has been built in line with Meta's Advertising Policies (including misleading-claims rules, landing-page quality, and privacy requirements). A Privacy Policy, Terms &amp; Conditions, and Disclaimer are publicly available on this page, and no data is collected without disclosure.</p>
+      <h4>5. Clear Advertising Information</h4>
+      <p>We aim to describe this community clearly and avoid promises about specific results. Meta independently reviews advertisements and may apply its own policies. The Meta Pixel is used only for advertising measurement as explained in the Privacy Policy.</p>
 
       <h4>6. Contact</h4>
-      <p>For any complaints or questions, please contact the administrator of our Telegram community or e-mail <b>[your-email@example.com]</b>.</p>
+      <p>For questions or complaints, please contact the administrator through the Telegram community.</p>
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT ================= -->
   <script>
-    /* ---------- 1) TICKER: rotating benefits ---------- */
+
     const tickerItems = [
-      '✅ YouTube Subscribers बढ़ाने के Tips',
-      '✅ 4000 Watch Hours पूरा करने की Guide',
-      '✅ YouTube Monetization की पूरी जानकारी',
-      '✅ Shorts और Long Videos की Growth Strategy',
-      '✅ YouTube SEO और Algorithm Updates',
-      '✅ चैनल की Reach और Views बढ़ाने के तरीके',
-      '✅ YouTube की नई Updates और Policies',
-      '✅ Creator के लिए Useful Tools और Apps',
-      '✅ Step-by-Step Tutorials और Solutions',
-      '💡 हमारा मिशन: हर Creator के YouTube सफर को आसान बनाना'
+      '✅ Daily Growth Tips & Strategies',
+      '✅ Latest Algorithm Updates और Guidance',
+      '✅ Content और Video Improvement Ideas',
+      '✅ Shorts और Long Videos की Strategy',
+      '✅ YouTube SEO और Discovery Tips',
+      '✅ Audience Engagement की Practical Guidance',
+      '✅ Creator Tools और Helpful Resources',
+      '✅ Q&A Support और Community Discussions',
+      '💡 Independent creators ke liye learning aur support'
     ];
     (function () {
       const el = document.getElementById('tickerText');
@@ -540,24 +481,6 @@
       }, 3000);
     })();
 
-    /* ---------- 2) COUNTDOWN: आज का ऑफर (local midnight तक) ---------- */
-    (function () {
-      const cd = document.getElementById('cd');
-      function tick() {
-        const now = new Date();
-        const end = new Date(now);
-        end.setHours(23, 59, 59, 999);
-        let diff = Math.max(0, end - now);
-        const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
-        const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-        const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-        cd.textContent = h + ':' + m + ':' + s;
-      }
-      tick();
-      setInterval(tick, 1000);
-    })();
-
-    /* ---------- 3) MODALS: open / close ---------- */
     document.querySelectorAll('[data-modal]').forEach(btn => {
       btn.addEventListener('click', () => {
         const m = document.getElementById(btn.dataset.modal);
@@ -577,17 +500,9 @@
       }
     });
 
-    /* ---------- 4) META PIXEL events: CTA click → Lead (ONE TIME per user) ----------
-       ⚡ Double-tracking protection:
-       - Ek user/browser par Lead event sirf 1 baar fire hota hai,
-         chahe user button ko kitni baar bhi click kare ya page dobara khole.
-       - localStorage flag: 'tg_lead_v1' (private mode me in-memory flag fallback)
-       - Agar future me naye campaign ke liye counting RESET karni ho,
-         to neeche 'tg_lead_v1' ko 'tg_lead_v2' kar do — sab users dobara count honge.
-    */
     (function () {
       const LEAD_KEY = 'tg_lead_v1';
-      let firedThisPage = false;   // same page-load me double click se bachne ke liye
+      let firedThisPage = false;
 
       function alreadyTracked() {
         if (firedThisPage) return true;
@@ -595,15 +510,15 @@
       }
       function markTracked() {
         firedThisPage = true;
-        try { localStorage.setItem(LEAD_KEY, '1'); } catch (e) { /* private mode — ignore */ }
+        try { localStorage.setItem(LEAD_KEY, '1'); } catch (e) {}
       }
 
       document.getElementById('telegramBtn').addEventListener('click', () => {
         if (typeof window.fbq !== 'function') return;
-        if (alreadyTracked()) return;              // pehle se track ho chuka — skip
+        if (alreadyTracked()) return;
         markTracked();
-        window.fbq('track', 'Lead');               /* standard event — Ads Manager me "Results" ke roop me dikhega */
-        window.fbq('trackCustom', 'TelegramJoinClick'); /* custom event — analysis ke liye */
+        window.fbq('track', 'Lead');
+        window.fbq('trackCustom', 'TelegramJoinClick');
       });
     })();
   </script>

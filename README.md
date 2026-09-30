@@ -1,72 +1,23 @@
-# 🚀 YouTube & Facebook Page Growth — Landing Page (Meta Ads Funnel)
+# YouTube & Facebook Creator Support
 
-Ultra high-converting, **single screen (no scrolling)** landing page for Meta ads →
-Telegram community join funnel.
+Static landing page for an independent, free creator community. The page sends visitors to the Telegram community and is hosted on the custom domain `ytsalutions.in`.
 
-## 📁 Files
+## Files
 
-| File | Kaam |
-|---|---|
-| `index.html` | **Main landing page** (HTML + CSS + JS sab ek hi file me) |
-| `README.md` | Ye file |
+- `index.html` — complete page with HTML, CSS and JavaScript
+- `CNAME` — custom domain configuration
 
-## ⚡ Setup
+## Links
 
-### 1) Telegram link — ✅ already set
-`https://t.me/+nZRxaOOdx2ozMGE1` — page me lag chuka hai.
-Badalna ho to `index.html` me **`t.me/`** search karo.
+- Main community: `https://t.me/+nZRxaOOdx2ozMGE1`
+- Advertising credit: `https://t.me/adstele_agency`
 
-### 2) Meta Pixel ID — ⏳ aapko lagani hai
-`index.html` me search karo: **`META_PIXEL_ID`** → `'PASTE_PIXEL_ID_HERE'` ki jagah apni Pixel ID.
+The advertising credit link is only a public attribution link. It has no Meta event or lead tracking. Tracking is attached only to the main Telegram community CTA.
 
-```js
-const META_PIXEL_ID = '123456789012345';   ← yahan apni ID
-```
+## Tracking retained
 
-Pixel ID milegi: [events.facebook.com](https://events.facebook.com) → Data Sources → Pixels.
-Test: Chrome me **"Meta Pixel Helper"** extension — page par `PageView`,
-button click par `Lead` fire hona chahiye.
+- `PageView` on page load
+- `Lead` on the main Telegram CTA, once per browser
+- `TelegramJoinClick` on the main Telegram CTA, once per browser
 
-### 3) (Optional) Email placeholder badlo
-Legal modals me `[your-email@example.com]` ko apne asli email se badal do.
-
-## 📊 Meta Tracking kaise kaam karta hai
-
-| Event | Kab | Kitni baar |
-|---|---|---|
-| `PageView` | Page load | Har visit par (normal) |
-| `Lead` | Telegram button click | **Sirf 1 baar per user/browser** 🛡️ |
-| `TelegramJoinClick` (custom) | Telegram button click | **Sirf 1 baar per user/browser** 🛡️ |
-
-**Double-tracking protection (already coded):**
-`localStorage` flag (`tg_lead_v1`) ki wajah se koi user button 100 baar bhi
-click kare ya page baar-baar khole — `Lead` **sirf ek hi baar** count hoga.
-Naye campaign ke liye counting reset karni ho to `index.html` me
-`'tg_lead_v1'` → `'tg_lead_v2'` kar do.
-
-**Ads Manager me kya dekhna hai:**
-- Campaign objective: **Leads** (optimise event: `Lead`)
-- Columns: *Results (Leads)* + *Cost per Result (Cost per Lead)*
-- Actual Telegram joins verify: Telegram ka **per-invite-link stats**
-  (ads ke liye ek alag invite link banao — Telegram khud batata hai
-  kitne log us link se join hue) → compare with Pixel Leads
-
-## 🌐 Free Hosting (GitHub Pages)
-
-1. Ye repo GitHub par push karo
-2. GitHub repo → **Settings → Pages**
-3. Source: `Deploy from a branch` → Branch: `main` / `(root)` → Save
-4. 1-2 min me page live: `https://username.github.io/youtub-salutions/`
-
-(Alternative: Cloudflare Pages, Netlify — sirf drag-and-drop karo.)
-
-## 📱 Features
-
-- ✅ 100% mobile responsive, single screen — koi scrolling nahi
-- ✅ Bada Telegram CTA button: "JOIN FREE TELEGRAM COMMUNITY"
-- ✅ Meta Pixel tracking with **one-lead-per-user** dedup
-- ✅ Privacy Policy / Terms & Conditions / Disclaimer — popup modals (full UK English)
-- ✅ Rotating benefits ticker (9 channel benefits + mission)
-- ✅ "Aaj ka offer" countdown timer (urgency ke liye)
-- ✅ Fast loading — koi framework nahi, ek hi HTML file
-- ✅ Landscape phones ke liye 2-column layout
+The existing Pixel ID and tracking behavior are retained. The page contains no forms, backend, payment flow, or framework.
