@@ -1,72 +1,52 @@
-# 🚀 YouTube & Facebook Page Growth — Landing Page (Meta Ads Funnel)
+# YouTube & Facebook Creator Support — Landing Page
 
-Ultra high-converting, **single screen (no scrolling)** landing page for Meta ads →
-Telegram community join funnel.
+Policy-friendly, single-screen landing page for a free independent creator community. The page is designed for Meta ads and sends interested creators to the Telegram community.
 
-## 📁 Files
+## Files
 
 | File | Kaam |
 |---|---|
-| `index.html` | **Main landing page** (HTML + CSS + JS sab ek hi file me) |
-| `README.md` | Ye file |
+| `index.html` | Main landing page — HTML, CSS and JavaScript in one file |
+| `CNAME` | Custom domain: `ytsalutions.in` |
+| `README.md` | Setup and tracking notes |
 
-## ⚡ Setup
+## Current page flow
 
-### 1) Telegram link — ✅ already set
-`https://t.me/+nZRxaOOdx2ozMGE1` — page me lag chuka hai.
-Badalna ho to `index.html` me **`t.me/`** search karo.
+`Meta ad → creator support landing page → Telegram community`
 
-### 2) Meta Pixel ID — ⏳ aapko lagani hai
-`index.html` me search karo: **`META_PIXEL_ID`** → `'PASTE_PIXEL_ID_HERE'` ki jagah apni Pixel ID.
+The page presents educational benefits such as algorithm updates, content and video tips, creator networking, Q&A discussions and community support. It does not promise specific views, subscribers, reach, approval or earnings, and clearly states that it is independent and not affiliated with YouTube, Facebook, Meta or Telegram.
 
-```js
-const META_PIXEL_ID = '123456789012345';   ← yahan apni ID
-```
+## Telegram links
 
-Pixel ID milegi: [events.facebook.com](https://events.facebook.com) → Data Sources → Pixels.
-Test: Chrome me **"Meta Pixel Helper"** extension — page par `PageView`,
-button click par `Lead` fire hona chahiye.
+- Main community CTA: `https://t.me/+nZRxaOOdx2ozMGE1`
+- Advertising credit link: `https://t.me/adstele_agency`
 
-### 3) (Optional) Email placeholder badlo
-Legal modals me `[your-email@example.com]` ko apne asli email se badal do.
+The `Advertising by @adstele_agency` link is only a credit/link for the advertising channel. It has no Meta event or lead tracking attached to it. Only the main Telegram community CTA keeps the existing Lead tracking.
 
-## 📊 Meta Tracking kaise kaam karta hai
+## Meta Pixel and events
+
+The existing Meta Pixel setup and event behavior have been preserved:
 
 | Event | Kab | Kitni baar |
 |---|---|---|
-| `PageView` | Page load | Har visit par (normal) |
-| `Lead` | Telegram button click | **Sirf 1 baar per user/browser** 🛡️ |
-| `TelegramJoinClick` (custom) | Telegram button click | **Sirf 1 baar per user/browser** 🛡️ |
+| `PageView` | Page load | Har visit par |
+| `Lead` | Main Telegram community CTA click | One time per browser via `localStorage` |
+| `TelegramJoinClick` | Main Telegram community CTA click | One time per browser via `localStorage` |
 
-**Double-tracking protection (already coded):**
-`localStorage` flag (`tg_lead_v1`) ki wajah se koi user button 100 baar bhi
-click kare ya page baar-baar khole — `Lead` **sirf ek hi baar** count hoga.
-Naye campaign ke liye counting reset karni ho to `index.html` me
-`'tg_lead_v1'` → `'tg_lead_v2'` kar do.
+Pixel ID, Pixel script, and existing tracking logic are intentionally unchanged. The tracking key is `tg_lead_v1`; changing it to a new version would reset the one-lead-per-browser protection.
 
-**Ads Manager me kya dekhna hai:**
-- Campaign objective: **Leads** (optimise event: `Lead`)
-- Columns: *Results (Leads)* + *Cost per Result (Cost per Lead)*
-- Actual Telegram joins verify: Telegram ka **per-invite-link stats**
-  (ads ke liye ek alag invite link banao — Telegram khud batata hai
-  kitne log us link se join hue) → compare with Pixel Leads
+## Free hosting with GitHub Pages
 
-## 🌐 Free Hosting (GitHub Pages)
+1. Push the repository to GitHub.
+2. Open **Settings → Pages**.
+3. Select **Deploy from a branch** → branch `main` / `(root)`.
+4. For the custom domain, keep `CNAME` as `ytsalutions.in` and configure the domain DNS as required by GitHub Pages.
 
-1. Ye repo GitHub par push karo
-2. GitHub repo → **Settings → Pages**
-3. Source: `Deploy from a branch` → Branch: `main` / `(root)` → Save
-4. 1-2 min me page live: `https://username.github.io/youtub-salutions/`
+Cloudflare Pages and Netlify can also host this static page without a build step.
 
-(Alternative: Cloudflare Pages, Netlify — sirf drag-and-drop karo.)
+## Notes
 
-## 📱 Features
-
-- ✅ 100% mobile responsive, single screen — koi scrolling nahi
-- ✅ Bada Telegram CTA button: "JOIN FREE TELEGRAM COMMUNITY"
-- ✅ Meta Pixel tracking with **one-lead-per-user** dedup
-- ✅ Privacy Policy / Terms & Conditions / Disclaimer — popup modals (full UK English)
-- ✅ Rotating benefits ticker (9 channel benefits + mission)
-- ✅ "Aaj ka offer" countdown timer (urgency ke liye)
-- ✅ Fast loading — koi framework nahi, ek hi HTML file
-- ✅ Landscape phones ke liye 2-column layout
+- No framework or backend is required.
+- The page is mobile responsive and optimized for a single screen.
+- Privacy Policy, Terms & Conditions, and Disclaimer are available in modal dialogs.
+- Replace the Telegram community link only if the destination changes; do not add tracking attributes to the advertising-credit link unless that requirement changes later.
