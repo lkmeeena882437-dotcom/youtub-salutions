@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <!-- ===================================================================
-       POLICY-FRIENDLY CREATOR COMMUNITY LANDING PAGE
-       Meta Ads ke liye | Telegram community funnel | Single screen
 
-       Existing Telegram CTA aur Meta Pixel tracking ko preserve kiya gaya hai.
-       =================================================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>YouTube &amp; Facebook Creators | Free Community &amp; Support Hub</title>
   <meta name="description" content="Free independent creator community for YouTube and Facebook creators. Get algorithm updates, content strategies, creator discussions and practical support.">
   <meta name="theme-color" content="#0c0720">
 
-  <!-- Open Graph (share पर अच्छा दिखे) -->
   <meta property="og:title" content="YouTube &amp; Facebook Creators | Free Community &amp; Support Hub">
   <meta property="og:description" content="Algorithm updates, content strategies and creator support. Join our independent free community.">
   <meta property="og:type" content="website">
 
-  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff3b30'/%3E%3Cpolygon points='26,18 48,32 26,46' fill='white'/%3E%3C/svg%3E">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ================= BASE ================= */
+
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { margin: 0; padding: 0; height: 100%; }
     body {
@@ -35,12 +27,11 @@
       background: #0c0720;
       color: #fff;
       height: 100dvh;
-      overflow: hidden;               /* single screen — no scrolling */
+      overflow: hidden;
       overscroll-behavior: none;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ================= BACKGROUND ================= */
     .bg {
       position: fixed; inset: 0; z-index: -1;
       background:
@@ -59,7 +50,6 @@
       50%      { transform: translate3d(14px, 18px, 0) scale(1.08); }
     }
 
-    /* ================= LAYOUT (single screen) ================= */
     .hero {
       height: 100dvh;
       max-width: 560px;
@@ -72,7 +62,6 @@
     }
     .col { display: flex; flex-direction: column; gap: clamp(8px, 1.6vh, 16px); min-height: 0; }
 
-    /* ================= HEADER / BADGE ================= */
     .top { display: flex; justify-content: center; }
     .badge-community {
       display: inline-flex; align-items: center; gap: 7px;
@@ -83,7 +72,6 @@
       color: #b9edff;
     }
 
-    /* ================= HEADLINE ================= */
     .headline { text-align: center; }
     .headline h1 {
       margin: 0;
@@ -101,7 +89,6 @@
       color: rgba(255,255,255,.82); font-weight: 500;
     }
 
-    /* ================= CREATOR BENEFITS CARD ================= */
     .benefits-card {
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.13);
@@ -149,7 +136,6 @@
       color: rgba(255,255,255,.57); line-height: 1.3;
     }
 
-    /* ================= TICKER ================= */
     .ticker {
       text-align: center;
       min-height: 22px;
@@ -158,7 +144,6 @@
     }
     .ticker span { transition: opacity .45s ease; }
 
-    /* ================= CTA ================= */
     .cta {
       display: flex; align-items: center; justify-content: center; gap: 11px;
       width: 100%;
@@ -197,7 +182,6 @@
     .ad-credit strong { color: #a9eaff; font-weight: 700; }
     .ad-credit:hover { color: #fff; background: rgba(42,171,238,.12); }
 
-    /* ================= FOOTER / LEGAL ================= */
     .legal {
       display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: center;
     }
@@ -214,7 +198,6 @@
       line-height: 1.5;
     }
 
-    /* ================= MODALS ================= */
     .modal {
       position: fixed; inset: 0; z-index: 60;
       background: rgba(8, 4, 22, .72);
@@ -253,7 +236,6 @@
       font-size: 15px; line-height: 1;
     }
 
-    /* ================= SHORT SCREENS (landscape phones) ================= */
     @media (max-height: 560px) and (orientation: landscape) {
       .hero {
         flex-direction: row; max-width: 960px;
@@ -265,7 +247,6 @@
       .cta { padding: 12px 14px; font-size: 15px; }
     }
 
-    /* ================= REDUCED MOTION ================= */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -273,20 +254,11 @@
 </head>
 <body>
 
-  <!-- ===== META (FACEBOOK) PIXEL — यहाँ अपनी Pixel ID डालें ===== -->
   <script>
-    /* ============================================================
-       ⚡ META PIXEL SETUP:
-       नीचे 'PASTE_PIXEL_ID_HERE' को अपनी Pixel ID से बदलें.
-       Pixel ID कहाँ मिलेगी: events.facebook.com → Data Sources → Pixels
-       Example ID ऐसी दिखती है: 123456789012345
-       ID डालने के बाद यह page open करें + "Meta Pixel Helper"
-       extension से check करें कि PageView fire हो रहा है.
-       ============================================================ */
+
     const META_PIXEL_ID = '1089305817042982';
 
     (function () {
-      // fbq stub — ताकि Pixel ID न होने पर भी page की कोई error न आए
       if (!window.fbq) {
         var n = window.fbq = function () {
           n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
@@ -295,10 +267,7 @@
         n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
       }
       var isReal = META_PIXEL_ID && META_PIXEL_ID.indexOf('PASTE') === -1 && META_PIXEL_ID.length > 5;
-      if (!isReal) {
-        console.warn('[Meta Pixel] Abhi Pixel ID nahi dali gayi — META_PIXEL_ID me apni ID paste karein.');
-        return;
-      }
+      if (!isReal) return;
       var t = document.createElement('script');
       t.async = true;
       t.src = 'https://connect.facebook.net/en_US/fbevents.js';
@@ -310,7 +279,7 @@
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=PASTE_PIXEL_ID_HERE&ev=PageView&noscript=1" />
+         src="https://www.facebook.com/tr?id=1089305817042982&ev=PageView&noscript=1" />
   </noscript>
 
   <div class="bg"></div>
@@ -319,7 +288,6 @@
 
   <main class="hero">
 
-    <!-- ============ TOP COLUMN ============ -->
     <div class="col col-top">
 
       <div class="top">
@@ -344,12 +312,10 @@
 
     </div>
 
-    <!-- ============ BOTTOM COLUMN ============ -->
     <div class="col col-bottom">
 
       <div class="ticker"><span id="tickerText">✅ Daily Growth Tips &amp; Strategies</span></div>
 
-      <!-- ⚡ TELEGRAM COMMUNITY LINK (agar badalna ho to yahan) -->
       <a class="cta" id="telegramBtn"
          href="https://t.me/+nZRxaOOdx2ozMGE1"
          target="_blank" rel="noopener noreferrer"
@@ -362,7 +328,6 @@
 
       <p class="cta-sub">✅ Free to Join &nbsp;•&nbsp; ✅ Instant Access &nbsp;•&nbsp; ✅ Creator Discussions</p>
 
-      <!-- Advertising credit only — this link has no event or lead tracking. -->
       <a class="ad-credit" href="https://t.me/adstele_agency" target="_blank" rel="noopener noreferrer">Advertising by <strong>@adstele_agency</strong></a>
 
       <div>
@@ -377,7 +342,6 @@
     </div>
   </main>
 
-  <!-- ================= MODAL: PRIVACY POLICY ================= -->
   <div class="modal" id="modalPrivacy" role="dialog" aria-modal="true" aria-label="Privacy Policy">
     <div class="modal-card">
       <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
@@ -426,7 +390,6 @@
     </div>
   </div>
 
-  <!-- ================= MODAL: TERMS & CONDITIONS ================= -->
   <div class="modal" id="modalTerms" role="dialog" aria-modal="true" aria-label="Terms and Conditions">
     <div class="modal-card">
       <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
@@ -471,7 +434,6 @@
     </div>
   </div>
 
-  <!-- ================= MODAL: DISCLAIMER ================= -->
   <div class="modal" id="modalDisclaimer" role="dialog" aria-modal="true" aria-label="Disclaimer">
     <div class="modal-card">
       <button class="modal-close" type="button" aria-label="Close" data-close>✕</button>
@@ -498,9 +460,8 @@
     </div>
   </div>
 
-  <!-- ================= JAVASCRIPT ================= -->
   <script>
-    /* ---------- 1) TICKER: rotating benefits ---------- */
+
     const tickerItems = [
       '✅ Daily Growth Tips & Strategies',
       '✅ Latest Algorithm Updates और Guidance',
@@ -525,7 +486,6 @@
       }, 3000);
     })();
 
-    /* ---------- 3) MODALS: open / close ---------- */
     document.querySelectorAll('[data-modal]').forEach(btn => {
       btn.addEventListener('click', () => {
         const m = document.getElementById(btn.dataset.modal);
@@ -545,17 +505,9 @@
       }
     });
 
-    /* ---------- 4) META PIXEL events: CTA click → Lead (ONE TIME per user) ----------
-       ⚡ Double-tracking protection:
-       - Ek user/browser par Lead event sirf 1 baar fire hota hai,
-         chahe user button ko kitni baar bhi click kare ya page dobara khole.
-       - localStorage flag: 'tg_lead_v1' (private mode me in-memory flag fallback)
-       - Agar future me naye campaign ke liye counting RESET karni ho,
-         to neeche 'tg_lead_v1' ko 'tg_lead_v2' kar do — sab users dobara count honge.
-    */
     (function () {
       const LEAD_KEY = 'tg_lead_v1';
-      let firedThisPage = false;   // same page-load me double click se bachne ke liye
+      let firedThisPage = false;
 
       function alreadyTracked() {
         if (firedThisPage) return true;
@@ -563,15 +515,15 @@
       }
       function markTracked() {
         firedThisPage = true;
-        try { localStorage.setItem(LEAD_KEY, '1'); } catch (e) { /* private mode — ignore */ }
+        try { localStorage.setItem(LEAD_KEY, '1'); } catch (e) {}
       }
 
       document.getElementById('telegramBtn').addEventListener('click', () => {
         if (typeof window.fbq !== 'function') return;
-        if (alreadyTracked()) return;              // pehle se track ho chuka — skip
+        if (alreadyTracked()) return;
         markTracked();
-        window.fbq('track', 'Lead');               /* standard event — Ads Manager me "Results" ke roop me dikhega */
-        window.fbq('trackCustom', 'TelegramJoinClick'); /* custom event — analysis ke liye */
+        window.fbq('track', 'Lead');
+        window.fbq('trackCustom', 'TelegramJoinClick');
       });
     })();
   </script>
