@@ -332,6 +332,16 @@
         </div>
       </section>
 
+      <section class="testimonial" id="testimonialSection" aria-label="Community member video review" hidden>
+        <p class="t-label">⭐ Real Creator Review</p>
+        <div class="video-frame">
+          <video id="testimonialVideo" src="assets/testimonial-9x16.mp4"
+                 preload="metadata" controls playsinline></video>
+        </div>
+        <p class="t-caption">“Community me algorithm updates aur practical support milta hai.” — community member</p>
+        <p class="t-disclaimer">Ye ek individual experience hai; results har creator ke liye alag ho sakte hain.</p>
+      </section>
+
     </div>
 
     <div class="col col-bottom">
@@ -488,6 +498,17 @@
     </div>
   </div>
 
+  <div class="handoff" id="handoffModal" role="dialog" aria-modal="true" aria-labelledby="handoffTitle">
+    <div class="handoff-card">
+      <h3 id="handoffTitle">📲 Telegram me kholein</h3>
+      <p>Facebook/Instagram ke andar wale browser me Telegram link kabhi-kabhi nahi khulta. Neeche button se try karein:</p>
+      <button type="button" class="handoff-btn primary" id="handoffOpen">OPEN IN TELEGRAM</button>
+      <button type="button" class="handoff-btn secondary" id="handoffCopy">📋 LINK COPY KAREIN</button>
+      <p class="handoff-note">App nahi khula? Link copy karke <b>Chrome browser</b> me paste karein, ya is browser ke menu (⋮) se <b>“Open in Browser”</b> chunein.</p>
+      <button type="button" class="handoff-btn ghost" id="handoffClose">✖ BAND KAREIN</button>
+    </div>
+  </div>
+
   <script>
 
     const tickerItems = [
@@ -567,6 +588,39 @@
           window.location.assign(TG_URL);
         }
       });
+
+      document.getElementById('handoffOpen').addEventListener('click', () => {
+        window.location.assign(TG_URL);
+      });
+
+      const copyBtn = document.getElementById('handoffCopy');
+      copyBtn.addEventListener('click', () => {
+        const done = () => {
+          copyBtn.textContent = '✅ COPY HO GAYA — AB CHROME ME KHOLEIN';
+          setTimeout(() => { copyBtn.textContent = '📋 LINK COPY KAREIN'; }, 2500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(TG_URL).then(done).catch(done);
+        } else { done(); }
+      });
+
+      document.getElementById('handoffClose').addEventListener('click', () => {
+        handoff.classList.remove('open');
+      });
+      handoff.addEventListener('click', (e) => {
+        if (e.target === handoff) handoff.classList.remove('open');
+      });
+    })();
+
+    /* Testimonial video: section tab tak chhupa rahta hai jab tak video
+       file maujood na ho (404 par hidden rehta hai), taaki page kabhi
+       "broken" na dikhe. */
+    (function () {
+      const section = document.getElementById('testimonialSection');
+      const video = document.getElementById('testimonialVideo');
+      if (!section || !video) return;
+      video.addEventListener('loadedmetadata', () => { section.hidden = false; });
+      video.addEventListener('error', () => { section.hidden = true; });
     })();
 
     /* Testimonial video: section tab tak chhupa rahta hai jab tak video
