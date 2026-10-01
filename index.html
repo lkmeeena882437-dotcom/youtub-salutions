@@ -234,6 +234,59 @@
       font-size: 15px; line-height: 1;
     }
 
+    /* Testimonial video (9:16) */
+    .testimonial { margin: 4px 0 0; text-align: center; }
+    .testimonial[hidden] { display: none; }
+    .testimonial .t-label {
+      margin: 0 0 8px; font-size: clamp(10px, 2.6vw, 12px);
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #9fe8ff; font-weight: 700;
+    }
+    .testimonial .video-frame {
+      position: relative; width: min(230px, 60vw); aspect-ratio: 9/16;
+      margin: 0 auto; border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.14); background: #0d0824;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
+    .testimonial video { width: 100%; height: 100%; object-fit: cover; display: block; background: #0d0824; }
+    .testimonial .t-caption {
+      margin: 9px auto 0; max-width: 34ch;
+      font-size: clamp(10.5px, 2.7vw, 12.5px);
+      color: rgba(255,255,255,.78); line-height: 1.6;
+    }
+    .testimonial .t-disclaimer { margin: 4px 0 0; font-size: clamp(8.6px, 2.2vw, 10px); color: rgba(255,255,255,.42); }
+
+    /* In-app browser handoff helper */
+    .handoff {
+      position: fixed; inset: 0; z-index: 70; display: none;
+      align-items: center; justify-content: center; padding: 18px;
+      background: rgba(8, 4, 22, .8);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .handoff.open { display: flex; }
+    .handoff-card {
+      background: linear-gradient(170deg, #1a1140, #140c30);
+      border: 1px solid rgba(255,255,255,.14); border-radius: 18px;
+      padding: 22px 18px; max-width: 340px; width: 100%; text-align: center;
+      box-shadow: 0 30px 80px rgba(0,0,0,.5);
+    }
+    .handoff-card h3 { margin: 0 0 6px; font-size: 16px; color: #ffd76a; }
+    .handoff-card p { margin: 6px 0; font-size: 12.5px; line-height: 1.65; color: rgba(255,255,255,.8); }
+    .handoff-btn {
+      display: block; width: 100%; margin: 10px 0 0; padding: 13px 14px;
+      border: none; border-radius: 12px; cursor: pointer;
+      font-family: inherit; font-weight: 800; font-size: 14px; letter-spacing: .04em;
+    }
+    .handoff-btn.primary { background: linear-gradient(92deg, #2aabee, #1877f2); color: #fff; }
+    .handoff-btn.secondary { background: rgba(255,255,255,.1); color: #fff; }
+    .handoff-btn.ghost { background: none; color: rgba(255,255,255,.55); font-weight: 600; font-size: 12px; }
+    .handoff-note { font-size: 10.5px !important; color: rgba(255,255,255,.5) !important; margin-top: 10px !important; }
+
+    .cta-note {
+      margin: 7px 0 0; text-align: center;
+      font-size: clamp(9.5px, 2.4vw, 11px); color: rgba(255,255,255,.55);
+    }
+
     @media (max-height: 560px) and (orientation: landscape) {
       .hero {
         flex-direction: row; max-width: 960px;
@@ -308,6 +361,16 @@
         </div>
       </section>
 
+      <section class="testimonial" id="testimonialSection" aria-label="Community member video review" hidden>
+        <p class="t-label">⭐ Real Creator Review</p>
+        <div class="video-frame">
+          <video id="testimonialVideo" src="assets/testimonial-9x16.mp4"
+                 preload="metadata" controls playsinline></video>
+        </div>
+        <p class="t-caption">“Community me algorithm updates aur practical support milta hai.” — community member</p>
+        <p class="t-disclaimer">Ye ek individual experience hai; results har creator ke liye alag ho sakte hain.</p>
+      </section>
+
     </div>
 
     <div class="col col-bottom">
@@ -316,12 +379,12 @@
 
       <a class="cta" id="telegramBtn"
          href="https://t.me/+nZRxaOOdx2ozMGE1"
-         target="_blank" rel="noopener noreferrer"
-         data-fb-event="Lead">
+         target="_blank" rel="noopener noreferrer">
         JOIN FREE TELEGRAM COMMUNITY
       </a>
 
       <p class="cta-sub">✅ Free to Join &nbsp;•&nbsp; ✅ Instant Access &nbsp;•&nbsp; ✅ Creator Discussions</p>
+      <p class="cta-note">📩 Join request bhejne ke baad admin jaldi approve karta hai — Telegram notification check karte rahein.</p>
 
       <a class="ad-credit" href="https://t.me/adstele_agency" target="_blank" rel="noopener noreferrer">Advertising by <strong>@adstele_agency</strong></a>
 
@@ -455,6 +518,17 @@
     </div>
   </div>
 
+  <div class="handoff" id="handoffModal" role="dialog" aria-modal="true" aria-labelledby="handoffTitle">
+    <div class="handoff-card">
+      <h3 id="handoffTitle">📲 Telegram me kholein</h3>
+      <p>Facebook/Instagram ke andar wale browser me Telegram link kabhi-kabhi nahi khulta. Neeche button se try karein:</p>
+      <button type="button" class="handoff-btn primary" id="handoffOpen">OPEN IN TELEGRAM</button>
+      <button type="button" class="handoff-btn secondary" id="handoffCopy">📋 LINK COPY KAREIN</button>
+      <p class="handoff-note">App nahi khula? Link copy karke <b>Chrome browser</b> me paste karein, ya is browser ke menu (⋮) se <b>“Open in Browser”</b> chunein.</p>
+      <button type="button" class="handoff-btn ghost" id="handoffClose">✖ BAND KAREIN</button>
+    </div>
+  </div>
+
   <script>
 
     const tickerItems = [
@@ -500,9 +574,16 @@
       }
     });
 
+    /* Tracking: exactly ONE Lead event per tap, once per browser.
+       (Custom duplicate event removed on purpose so Ads Manager numbers
+       stay 1 tap = 1 lead.) */
     (function () {
+      const TG_URL = 'https://t.me/+nZRxaOOdx2ozMGE1';
       const LEAD_KEY = 'tg_lead_v1';
       let firedThisPage = false;
+
+      const ua = navigator.userAgent || '';
+      const inAppBrowser = /FBAN|FBAV|FB_IAB|Instagram/i.test(ua);
 
       function alreadyTracked() {
         if (firedThisPage) return true;
@@ -513,13 +594,53 @@
         try { localStorage.setItem(LEAD_KEY, '1'); } catch (e) {}
       }
 
-      document.getElementById('telegramBtn').addEventListener('click', () => {
-        if (typeof window.fbq !== 'function') return;
-        if (alreadyTracked()) return;
-        markTracked();
-        window.fbq('track', 'Lead');
-        window.fbq('trackCustom', 'TelegramJoinClick');
+      const handoff = document.getElementById('handoffModal');
+
+      document.getElementById('telegramBtn').addEventListener('click', (e) => {
+        if (typeof window.fbq === 'function' && !alreadyTracked()) {
+          markTracked();
+          window.fbq('track', 'Lead');
+        }
+        /* Facebook/Instagram ke in-app browser me naya tab kharab khulta hai,
+           isliye wahan direct new-tab ke bajaye rescue dialog dikhao. */
+        if (inAppBrowser) {
+          e.preventDefault();
+          handoff.classList.add('open');
+        }
       });
+
+      document.getElementById('handoffOpen').addEventListener('click', () => {
+        window.location.assign(TG_URL);
+      });
+
+      const copyBtn = document.getElementById('handoffCopy');
+      copyBtn.addEventListener('click', () => {
+        const done = () => {
+          copyBtn.textContent = '✅ COPY HO GAYA — AB CHROME ME KHOLEIN';
+          setTimeout(() => { copyBtn.textContent = '📋 LINK COPY KAREIN'; }, 2500);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(TG_URL).then(done).catch(done);
+        } else { done(); }
+      });
+
+      document.getElementById('handoffClose').addEventListener('click', () => {
+        handoff.classList.remove('open');
+      });
+      handoff.addEventListener('click', (e) => {
+        if (e.target === handoff) handoff.classList.remove('open');
+      });
+    })();
+
+    /* Testimonial video: section tab tak chhupa rahta hai jab tak video
+       file maujood na ho (404 par hidden rehta hai), taaki page kabhi
+       "broken" na dikhe. */
+    (function () {
+      const section = document.getElementById('testimonialSection');
+      const video = document.getElementById('testimonialVideo');
+      if (!section || !video) return;
+      video.addEventListener('loadedmetadata', () => { section.hidden = false; });
+      video.addEventListener('error', () => { section.hidden = true; });
     })();
   </script>
 </body>
