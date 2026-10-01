@@ -90,48 +90,48 @@
     .benefits-card {
       background: rgba(255,255,255,.07);
       border: 1px solid rgba(255,255,255,.13);
-      border-radius: 20px;
-      padding: clamp(13px, 2.3vh, 19px) clamp(12px, 3.5vw, 18px);
+      border-radius: 16px;
+      padding: clamp(10px, 1.7vh, 14px) clamp(10px, 3vw, 14px);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
       box-shadow: 0 18px 44px rgba(0,0,0,.32);
     }
     .benefits-heading {
       margin: 0;
-      font-size: clamp(13px, 3.4vw, 16px);
+      font-size: clamp(12px, 3vw, 14px);
       font-weight: 700;
       color: #fff;
     }
     .benefits-intro {
-      margin: 4px 0 0;
-      font-size: clamp(10px, 2.5vw, 12px);
+      margin: 3px 0 0;
+      font-size: clamp(9.5px, 2.3vw, 11px);
       color: rgba(255,255,255,.62);
     }
     .benefits-grid {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(7px, 1.4vh, 10px);
-      margin-top: clamp(10px, 1.9vh, 14px);
+      gap: clamp(6px, 1.1vh, 8px);
+      margin-top: clamp(8px, 1.4vh, 10px);
     }
     .benefit {
-      display: flex; align-items: flex-start; gap: 8px;
+      display: flex; align-items: flex-start; gap: 7px;
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.10);
-      border-radius: 12px;
-      padding: clamp(8px, 1.6vh, 11px) 10px;
-      font-size: clamp(10px, 2.65vw, 12.5px);
+      border-radius: 10px;
+      padding: clamp(6px, 1.1vh, 8px) 9px;
+      font-size: clamp(9.5px, 2.5vw, 11.5px);
     }
     .benefit .ck {
       flex: 0 0 auto;
-      width: 17px; height: 17px; border-radius: 50%;
+      width: 15px; height: 15px; border-radius: 50%;
       background: linear-gradient(135deg, #22e07a, #12b866);
       display: inline-flex; align-items: center; justify-content: center;
-      font-size: 10px; color: #062; font-weight: 800;
+      font-size: 9px; color: #062; font-weight: 800;
     }
-    .benefit-text { display: block; line-height: 1.3; }
+    .benefit-text { display: block; line-height: 1.25; }
     .benefit-text b { display: block; font-weight: 700; }
     .benefit-text small {
-      display: block; margin-top: 3px;
-      font-size: clamp(8.5px, 2.15vw, 10px);
-      color: rgba(255,255,255,.57); line-height: 1.3;
+      display: block; margin-top: 2px;
+      font-size: clamp(8px, 2vw, 9.5px);
+      color: rgba(255,255,255,.57); line-height: 1.25;
     }
 
     .ticker {
@@ -234,6 +234,30 @@
       font-size: 15px; line-height: 1;
     }
 
+    /* Testimonial video (9:16) */
+    .testimonial { margin: 6px 0 0; text-align: center; }
+    .testimonial[hidden] { display: none; }
+    .testimonial .video-frame {
+      position: relative; width: min(238px, 62vw); aspect-ratio: 9/16;
+      margin: 0 auto; border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,.14); background: #0d0824;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    }
+    .testimonial video { width: 100%; height: 100%; object-fit: cover; display: block; background: #0d0824; }
+    .testimonial .t-disclaimer { margin: 6px 0 0; font-size: clamp(8.6px, 2.2vw, 10px); color: rgba(255,255,255,.42); }
+
+    .review-line {
+      margin: 10px auto 0; text-align: center;
+      font-size: clamp(12px, 3.2vw, 15px); font-weight: 800; letter-spacing: .02em;
+      background: linear-gradient(92deg, #ffd76a, #ff9d3c);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .cta-note {
+      margin: 7px 0 0; text-align: center;
+      font-size: clamp(9.5px, 2.4vw, 11px); color: rgba(255,255,255,.55);
+    }
+
     @media (max-height: 560px) and (orientation: landscape) {
       .hero {
         flex-direction: row; max-width: 960px;
@@ -314,14 +338,22 @@
 
       <div class="ticker"><span id="tickerText">✅ Daily Growth Tips &amp; Strategies</span></div>
 
+      <section class="testimonial" id="testimonialSection" aria-label="Creator video review" hidden>
+        <div class="video-frame">
+          <video id="testimonialVideo" src="assets/testimonial-9x16.mp4"
+                 preload="metadata" controls playsinline></video>
+        </div>
+        <p class="review-line">Real Creator Experience &amp; Community Support Review</p>
+      </section>
+
       <a class="cta" id="telegramBtn"
          href="https://t.me/+nZRxaOOdx2ozMGE1"
-         target="_blank" rel="noopener noreferrer"
-         data-fb-event="Lead">
+         target="_blank" rel="noopener noreferrer">
         JOIN FREE TELEGRAM COMMUNITY
       </a>
 
       <p class="cta-sub">✅ Free to Join &nbsp;•&nbsp; ✅ Instant Access &nbsp;•&nbsp; ✅ Creator Discussions</p>
+      <p class="cta-note">📩 Join request bhejne ke baad admin jaldi approve karta hai — Telegram notification check karte rahein.</p>
 
       <a class="ad-credit" href="https://t.me/adstele_agency" target="_blank" rel="noopener noreferrer">Advertising by <strong>@adstele_agency</strong></a>
 
@@ -332,6 +364,7 @@
           <button type="button" data-modal="modalDisclaimer">Disclaimer</button>
         </div>
         <p class="micro">🔒 हम आपका कभी Password / OTP नहीं माँगते &nbsp;•&nbsp; Independent community, not affiliated with YouTube, Meta or Telegram.</p>
+        <p class="micro">Video testimonial ek individual creator ka experience hai; results har creator ke liye alag ho sakte hain.</p>
       </div>
 
     </div>
@@ -500,9 +533,16 @@
       }
     });
 
+    /* Tracking: exactly ONE Lead event per tap, once per browser.
+       (Custom duplicate event removed on purpose so Ads Manager numbers
+       stay 1 tap = 1 lead.) */
     (function () {
+      const TG_URL = 'https://t.me/+nZRxaOOdx2ozMGE1';
       const LEAD_KEY = 'tg_lead_v1';
       let firedThisPage = false;
+
+      const ua = navigator.userAgent || '';
+      const inAppBrowser = /FBAN|FBAV|FB_IAB|Instagram/i.test(ua);
 
       function alreadyTracked() {
         if (firedThisPage) return true;
@@ -513,13 +553,31 @@
         try { localStorage.setItem(LEAD_KEY, '1'); } catch (e) {}
       }
 
-      document.getElementById('telegramBtn').addEventListener('click', () => {
-        if (typeof window.fbq !== 'function') return;
-        if (alreadyTracked()) return;
-        markTracked();
-        window.fbq('track', 'Lead');
-        window.fbq('trackCustom', 'TelegramJoinClick');
+      document.getElementById('telegramBtn').addEventListener('click', (e) => {
+        if (typeof window.fbq === 'function' && !alreadyTracked()) {
+          markTracked();
+          window.fbq('track', 'Lead');
+        }
+        /* Facebook/Instagram ke in-app browser me naya tab toot-ta hai.
+           Wahan user se koi extra tap karwaye bina usi tab me Telegram
+           khol dete hain — Telegram ka apna page aage handoff sambhal
+           leta hai. Normal browsers me purana new-tab flow chalta hai. */
+        if (inAppBrowser) {
+          e.preventDefault();
+          window.location.assign(TG_URL);
+        }
       });
+    })();
+
+    /* Testimonial video: section tab tak chhupa rahta hai jab tak video
+       file maujood na ho (404 par hidden rehta hai), taaki page kabhi
+       "broken" na dikhe. */
+    (function () {
+      const section = document.getElementById('testimonialSection');
+      const video = document.getElementById('testimonialVideo');
+      if (!section || !video) return;
+      video.addEventListener('loadedmetadata', () => { section.hidden = false; });
+      video.addEventListener('error', () => { section.hidden = true; });
     })();
   </script>
 </body>
