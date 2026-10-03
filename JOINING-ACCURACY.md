@@ -128,12 +128,54 @@ actually member bane. Drop exactly kis step par hai, roz pata chalega.
 
 ---
 
-## 7. Code changes (is PR me)
+## 7. Code changes (ye PR — single-button flow)
+
+Confirmation popup (do buttons) **hata diya gaya**. Page par ab sirf wahi ek CTA
+hai jo pehle tha — tap karte hi `Lead` fire hota hai aur visitor seedha Telegram
+jata hai.
 
 | File | Change |
 |---|---|
-| `index.html` | Confirm modal me **"Aage kya hoga?"** 3-step guide + app-na-hone wala hint (Telegram screen par confusion se hone wala drop kam) |
-| `index.html` | **fbclid + UTM capture** → localStorage (`fb_click_v1`, Meta ka standard `fbc` format). Ye step 5 (CAPI real-join event) ke liye zaroori hai — abhi sirf store hota hai, koi extra network call nahi |
-| `LEAD-DROP-REPORT.md` | Handoff bug fixes ka record (pichla PR) |
+| `index.html` | **Confirm modal + uske dono buttons ("YES, JOIN FREE" / "Not now") remove** — ab page par sirf main CTA hai |
+| `index.html` | **`TelegramCtaTap` custom event remove.** Ab sirf `PageView` + `Lead` fire hote hain |
+| `index.html` | `Lead` ab CTA tap par fire hota hai, `content_name` / `content_category` params ke saath, aur **stable `eventID`** ke saath (CAPI dedupe ke liye ready). Dedupe per browser **waise hi** hai (`LEAD_ONCE_PER_BROWSER = true` — `false` karke har tap count karaya ja sakta hai) |
+| `index.html` | `fbclid` + UTM capture → localStorage (`fb_click_v1`, Meta-standard `fbc` format). Step 5 (CAPI real-join event) ke liye zaroori — abhi sirf store hota hai, koi extra network call nahi |
+| `index.html` | Handoff fixes barkarar: in-app/mobile same-tab, desktop new tab (sync), **popup blocked → same-tab fallback**, 300 ms pixel flush gap, double-tap guard |
+| `index.html` | Privacy Policy ka woh ek line update jisme "confirmation dialog" likha tha (ab "Lead event" — implementation se match karta hai) |
 
-Pixel ID, event names, confirm-only `Lead`, dedupe — **kuch nahi badla**, running campaign safe hai.
+**Kya nahi badla:** pixel ID (`1089305817042982`), `Lead` event ka naam, Telegram
+URL, page ka baaki poora content, aur dedupe behaviour — isliye **running campaign
+aur uska learning phase safe hai.**
+
+### Trade-off saaf-saaf (aapka faisla)
+
+Single-button flow me **accidental / bot taps bhi `Lead` ban jaate hain** — matlab
+Meta ka lead number pehle se thoda **zyada** dikhega, jabki actual joins uske
+barabar nahi honge. Isliye:
+
+- **Achhi baat:** friction ek step kam hui → asli joins badhne chahiye (jo log
+  modal par atak jaate the woh ab seedha chale jayenge).
+- **Dhyan rakhne ki baat:** Meta ka "leads" = **tap**, join nahi. Ye gap khud
+  khatam nahi hoga — uske liye **step 4 + 5 (bot + CAPI real-join event)**
+  chahiye. Wahi ek cheez hai jo Meta ko batayegi ki asli join kitne hue, aur
+  campaign ko taps ki jagah joins par optimize karwayegi.
+
+`TelegramJoinClick` event is code me **kahin nahi hai** — Events Manager me wo
+kisi aur page / purane cached version se aa raha hoga. Events Manager → event
+kholkar dekhein kis URL se aa raha hai; agar zaroorat na ho to us event ko
+archive kar dein.
+
+### Test results (naye flow, fake-DOM harness)
+
+| Scenario | Lead | Telegram destination | Button state |
+|---|---|---|---|
+| iOS Safari | 1 | same tab ✅ | disabled ✅ |
+| FB in-app | 1 | same tab ✅ | disabled ✅ |
+| WhatsApp in-app | 1 | same tab ✅ | disabled ✅ |
+| Android Chrome | 1 | same tab ✅ | disabled ✅ |
+| Desktop Chrome | 1 | new tab ✅ | disabled ✅ |
+| Desktop + popup blocked | 1 | same-tab fallback ✅ | disabled ✅ |
+| 3 baar tap | **1** | ek hi handoff ✅ | disabled ✅ |
+| Pixel blocked (`fbq` missing) | 0 | **phir bhi Telegram khula ✅** | disabled ✅ |
+| Returning visitor (already lead) | 0 | Telegram khula ✅ | disabled ✅ |
+| `eventID` per browser | — | stable rehta hai ✅ | — |

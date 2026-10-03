@@ -281,48 +281,13 @@
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
 
-    .confirm-card { text-align: center; max-width: 380px; }
-    .confirm-card h3 { font-size: 17px; }
-    .confirm-list {
-      list-style: none; margin: 12px 0 0; padding: 0; text-align: left;
+    /* CTA handoff state (tap ke baad, Telegram khulne se pehle) */
+    .cta.busy {
+      opacity: .82;
+      pointer-events: none;
+      animation: none;
     }
-    .confirm-list li {
-      margin: 8px 0; font-size: 12.2px; line-height: 1.55;
-      color: rgba(255,255,255,.84);
-    }
-    .confirm-list b { color: #fff; }
-
-    /* "Aage kya hoga" — Telegram screen par confusion hone se log
-       ruk jaate hain; pehle se bata dena drop kam karta hai. */
-    .confirm-steps {
-      margin: 14px 0 0; padding: 11px 13px;
-      background: rgba(42,171,238,.10);
-      border: 1px solid rgba(127,215,255,.28);
-      border-radius: 12px;
-      text-align: left;
-    }
-    .confirm-steps .cs-title {
-      margin: 0 0 7px; font-size: 11.5px; font-weight: 700;
-      color: #9fe8ff; letter-spacing: .3px;
-    }
-    .confirm-steps ol { margin: 0; padding-left: 19px; }
-    .confirm-steps li {
-      margin: 5px 0; font-size: 11.8px; line-height: 1.5;
-      color: rgba(255,255,255,.86);
-    }
-    .confirm-steps li b { color: #fff; }
-    .confirm-hint {
-      margin: 9px 0 0; font-size: 10.6px; line-height: 1.55;
-      color: rgba(255,255,255,.62);
-    }
-    .confirm-yes { margin-top: 16px; }
-    .confirm-no {
-      margin: 10px auto 0; display: block;
-      background: none; border: none; cursor: pointer;
-      color: rgba(255,255,255,.55); font-family: inherit;
-      font-size: 12px; font-weight: 600; padding: 6px;
-    }
-    .confirm-no:hover { color: rgba(255,255,255,.85); }
+    .cta.busy::after { display: none; }
 
     .cta-note {
       margin: 7px 0 0; text-align: center;
@@ -461,7 +426,7 @@
         <li>Page activity (for example, selecting the join button)</li>
         <li>IP address and cookie data, in line with Meta's own data policy</li>
       </ul>
-      <p>When you select the join button, a confirmation dialog appears first. Only a <b>confirmed</b> join is recorded, and to prevent duplicate reporting it is recorded <b>only once per user per browser</b>, no matter how many times it is selected. This information is used solely for advertising measurement and optimisation.</p>
+      <p>When you select the join button, a standard <b>"Lead"</b> event is recorded, and to prevent duplicate reporting it is recorded <b>only once per user per browser</b>, no matter how many times it is selected. This information is used solely for advertising measurement and optimisation.</p>
 
       <h4>3. How We Use This Information</h4>
       <p>We use this information only to measure and improve our advertising campaigns (for example, to understand the cost of reaching new community members) and to deliver more relevant advertisements through Meta's advertising tools. <b>We do not sell your data</b>, nor do we share it with third parties for their own marketing purposes.</p>
@@ -562,32 +527,6 @@
     </div>
   </div>
 
-  <div class="modal" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
-    <div class="modal-card confirm-card">
-      <button type="button" class="modal-close" data-close aria-label="Band karein">✕</button>
-      <h3 id="confirmTitle">🎉 What You’ll Get in our channel</h3>
-      <ul class="confirm-list">
-        <li>📈 Algorithm updates &amp; growth tips</li>
-        <li>🎬 Content, Shorts &amp; SEO ideas</li>
-        <li>🤝 Creator support &amp; community</li>
-        <li>✅ 100% FREE to join</li>
-      </ul>
-
-      <div class="confirm-steps">
-        <p class="cs-title">AAGE KYA HOGA?</p>
-        <ol>
-          <li>Telegram app khulega (2 second)</li>
-          <li>Neeche <b>Join</b> / <b>Request to Join</b> dabayein</li>
-          <li>Bas — aap andar hain 🎉</li>
-        </ol>
-        <p class="confirm-hint">ℹ️ Telegram app phone me nahi hai? Koi baat nahi — agle page par hi free download ka option milega.</p>
-      </div>
-
-      <button type="button" class="cta confirm-yes" id="confirmYes">✅ YES, JOIN FREE</button>
-      <button type="button" class="confirm-no" id="confirmNo">❌ Not now</button>
-    </div>
-  </div>
-
   <script>
 
     const tickerItems = [
@@ -658,19 +597,28 @@
       } catch (e) {}
     })();
 
-    /* Tracking + Telegram handoff.
-       - Lead event: exactly ONE per confirmed tap, once per browser
-         (1 confirm tap = 1 Lead; accidental taps count nahi hote).
-       - Handoff: har browser me Telegram khule — in-app browser, mobile
-         aur desktop. Popup block ho jaye to same-tab fallback chalta hai,
-         warna pehle Lead count hoti thi aur user Telegram tak pahunchta
-         hi nahi tha (silent dead-end). */
+    /* Tracking + Telegram handoff — SINGLE BUTTON FLOW.
+       - Page par sirf ek hi CTA hai. Tap = `Lead` event + turant Telegram
+         handoff. Koi confirmation popup nahi, koi doosra custom event nahi
+         (TelegramCtaTap hata diya gaya hai).
+       - `Lead` exactly ONE per browser: ek hi banda (ya bot) baar-baar tap
+         karke number inflate na kar sake. Toggle karne ke liye neeche
+         LEAD_ONCE_PER_BROWSER ko `false` kar dein.
+       - Har `Lead` ke saath ek stable eventID bhi jaata hai — ye CAPI
+         dedupe ke liye ready rakha gaya hai (aage jab real-join event
+         server se bhejenge, duplicate na bane).
+       - Handoff: in-app browser aur mobile me same-tab (popup block ka
+         sawaal hi nahi); desktop par tab tap ke andar synchronously khulta
+         hai aur popup block hone par same-tab fallback chalta hai — user
+         har haal me Telegram pahunchta hai. */
     (function () {
       const TG_URL = 'https://t.me/+nZRxaOOdx2ozMGE1';
       const LEAD_KEY = 'tg_lead_v1';
+      const LEAD_EVENT_ID_KEY = 'fb_lead_event_v1';
       const FLUSH_MS = 300; /* pixel beacon ko page chhodne ka chhota sa waqt */
-      const YES_LABEL = '✅ YES, JOIN FREE';
+      const LEAD_ONCE_PER_BROWSER = true;
       let firedThisPage = false;
+      let handoffStarted = false;
 
       const ua = navigator.userAgent || '';
       /* FB / IG / Messenger / WhatsApp / TikTok / Snapchat / Google app /
@@ -680,6 +628,7 @@
 
       function alreadyTracked() {
         if (firedThisPage) return true;
+        if (!LEAD_ONCE_PER_BROWSER) return false;
         try { return localStorage.getItem(LEAD_KEY) === '1'; } catch (e) { return false; }
       }
       function markTracked() {
@@ -687,33 +636,37 @@
         try { localStorage.setItem(LEAD_KEY, '1'); } catch (e) {}
       }
 
-      const confirmModal = document.getElementById('confirmModal');
-      const confirmYes = document.getElementById('confirmYes');
-
-      function resetYesButton() {
-        if (!confirmYes) return;
-        confirmYes.disabled = false;
-        confirmYes.textContent = YES_LABEL;
+      /* Ek browser ke liye ek stable event id (CAPI dedupe ke liye ready). */
+      function leadEventId() {
+        try {
+          let id = localStorage.getItem(LEAD_EVENT_ID_KEY);
+          if (!id) {
+            id = 'lead_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+            localStorage.setItem(LEAD_EVENT_ID_KEY, id);
+          }
+          return id;
+        } catch (e) { return null; }
       }
 
-      /* Step 2: Lead fire hone ke baad asli handoff. */
-      function openTelegram() {
-        if (confirmYes) {
-          confirmYes.disabled = true;
-          confirmYes.textContent = '🔄 Telegram khol rahe hain…';
+      function openTelegram(btn) {
+        if (handoffStarted) return;
+        handoffStarted = true;
+        if (btn) {
+          btn.classList.add('busy');
+          btn.setAttribute('aria-busy', 'true');
+          btn.textContent = '🔄 Telegram khol rahe hain…';
         }
         const goSameTab = () => { window.location.href = TG_URL; };
 
-        /* In-app aur mobile: same-tab handoff. Popup block ka sawaal hi
-           nahi, aur t.me khud Telegram app ko khol leta hai. */
+        /* In-app aur mobile: same-tab handoff. t.me khud Telegram app
+           khol leta hai — koi naya tab, koi popup block nahi. */
         if (inAppBrowser || isMobile) {
           setTimeout(goSameTab, FLUSH_MS);
           return;
         }
 
-        /* Desktop: khali tab confirm-tap ke turant (synchronous) kholna
-           zaroori hai — setTimeout ke baad window.open browser block kar
-           deta hai. URL uske baad bharte hain. */
+        /* Desktop: khali tab tap ke turant (synchronous) kholna zaroori
+           hai — setTimeout ke baad window.open browser block kar deta hai. */
         let win = null;
         try { win = window.open('about:blank', '_blank'); } catch (e) { win = null; }
         if (win && win.location) {
@@ -725,38 +678,29 @@
             try { win.location.href = TG_URL; } catch (e) { goSameTab(); }
           }, FLUSH_MS);
         } else {
-          /* Popup blocked → same tab me le jao. Isi case me pehle kuch
-             nahi hota tha: Lead count hoti thi, join nahi. */
+          /* Popup blocked → same tab me le jao (warna silent dead-end). */
           setTimeout(goSameTab, FLUSH_MS);
         }
       }
 
-      /* Step 1: CTA tap → confirmation dialog khulta hai.
-         Galti se hue tap kabhi lead nahi bante.
-         (TelegramCtaTap sirf diagnostic custom event hai — ye kabhi
-         "Website Leads" counting me NAHI jaata.) */
+      /* Main CTA: tap = 1 Lead event + Telegram handoff. Bas itna hi. */
       document.getElementById('telegramBtn').addEventListener('click', (e) => {
         e.preventDefault();
-        if (typeof window.fbq === 'function') {
-          window.fbq('trackCustom', 'TelegramCtaTap');
-        }
-        resetYesButton();
-        confirmModal.classList.add('open');
-      });
 
-      /* Step 2: confirm tap → exactly ONE Lead event (once per browser),
-         uske baad hi Telegram khulta hai. */
-      confirmYes.addEventListener('click', () => {
         if (typeof window.fbq === 'function' && !alreadyTracked()) {
           markTracked();
-          window.fbq('track', 'Lead');
+          const opts = {};
+          const eid = leadEventId();
+          if (eid) opts.eventID = eid;
+          try {
+            window.fbq('track', 'Lead', {
+              content_name: 'Telegram Community Join',
+              content_category: 'Creator Community'
+            }, opts);
+          } catch (err) {}
         }
-        confirmModal.classList.remove('open');
-        openTelegram();
-      });
 
-      document.getElementById('confirmNo').addEventListener('click', () => {
-        confirmModal.classList.remove('open');
+        openTelegram(e.currentTarget);
       });
     })();
 

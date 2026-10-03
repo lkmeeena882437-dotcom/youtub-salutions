@@ -4,6 +4,13 @@ Date: 3 October 2026
 Page: `ytsalutions.in` (index.html) · Pixel: `1089305817042982`
 Telegram destination: `https://t.me/+nZRxaOOdx2ozMGE1` — **channel** "YOUTUBE MONETIZATION SOLUTIONS" (339 subscribers at the time of this check)
 
+> **UPDATE (3 Oct 2026, baad me):** Do-step confirmation flow hata diya gaya hai.
+> Ab page par **sirf ek CTA** hai — tap = `Lead` + turant Telegram handoff.
+> `TelegramCtaTap` event bhi hata diya gaya. Isliye neeche jo bhi "confirm tap"
+> ya "TelegramCtaTap" ka zikr hai, use **history** samjhein — ab flow single-tap
+> hai. Handoff fixes (popup-blocked fallback, in-app detection, 300 ms flush
+> gap) waise hi lagu hain. Dekhein `JOINING-ACCURACY.md` section 7.
+
 ---
 
 ## 1. TL;DR (seedhi baat)
