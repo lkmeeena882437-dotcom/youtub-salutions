@@ -291,6 +291,30 @@
       color: rgba(255,255,255,.84);
     }
     .confirm-list b { color: #fff; }
+
+    /* "Aage kya hoga" — Telegram screen par confusion hone se log
+       ruk jaate hain; pehle se bata dena drop kam karta hai. */
+    .confirm-steps {
+      margin: 14px 0 0; padding: 11px 13px;
+      background: rgba(42,171,238,.10);
+      border: 1px solid rgba(127,215,255,.28);
+      border-radius: 12px;
+      text-align: left;
+    }
+    .confirm-steps .cs-title {
+      margin: 0 0 7px; font-size: 11.5px; font-weight: 700;
+      color: #9fe8ff; letter-spacing: .3px;
+    }
+    .confirm-steps ol { margin: 0; padding-left: 19px; }
+    .confirm-steps li {
+      margin: 5px 0; font-size: 11.8px; line-height: 1.5;
+      color: rgba(255,255,255,.86);
+    }
+    .confirm-steps li b { color: #fff; }
+    .confirm-hint {
+      margin: 9px 0 0; font-size: 10.6px; line-height: 1.55;
+      color: rgba(255,255,255,.62);
+    }
     .confirm-yes { margin-top: 16px; }
     .confirm-no {
       margin: 10px auto 0; display: block;
@@ -548,6 +572,17 @@
         <li>🤝 Creator support &amp; community</li>
         <li>✅ 100% FREE to join</li>
       </ul>
+
+      <div class="confirm-steps">
+        <p class="cs-title">AAGE KYA HOGA?</p>
+        <ol>
+          <li>Telegram app khulega (2 second)</li>
+          <li>Neeche <b>Join</b> / <b>Request to Join</b> dabayein</li>
+          <li>Bas — aap andar hain 🎉</li>
+        </ol>
+        <p class="confirm-hint">ℹ️ Telegram app phone me nahi hai? Koi baat nahi — agle page par hi free download ka option milega.</p>
+      </div>
+
       <button type="button" class="cta confirm-yes" id="confirmYes">✅ YES, JOIN FREE</button>
       <button type="button" class="confirm-no" id="confirmNo">❌ Not now</button>
     </div>
@@ -597,6 +632,31 @@
         document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
       }
     });
+
+    /* Click-ID capture (future-proof): Meta ka fbclid aur UTM params
+       save kar lete hain. Ye data baad me Telegram bot + Conversions API
+       se "asli join" ka event Meta ko bhejne ke liye chahiye hota hai —
+       tab campaign joins par optimize hoga, sirf taps par nahi.
+       Abhi ye sirf store hota hai; koi extra network call nahi. */
+    (function () {
+      try {
+        const p = new URLSearchParams(window.location.search);
+        const fbclid = p.get('fbclid');
+        if (!fbclid) return;
+        const utm = {};
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(k => {
+          const v = p.get(k);
+          if (v) utm[k] = v;
+        });
+        /* Meta ka standard fbc format: fb.1.<click_time_ms>.<fbclid> */
+        localStorage.setItem('fb_click_v1', JSON.stringify({
+          fbc: 'fb.1.' + Date.now() + '.' + fbclid,
+          fbclid,
+          utm,
+          ts: Date.now()
+        }));
+      } catch (e) {}
+    })();
 
     /* Tracking + Telegram handoff.
        - Lead event: exactly ONE per confirmed tap, once per browser
