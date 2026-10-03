@@ -14,29 +14,45 @@ Static landing page for an independent, free creator community. The page sends v
 
 The advertising credit link is only a public attribution link. It has no Meta event or lead tracking. Tracking is attached only to the main Telegram community CTA.
 
-## Tracking retained (two-step confirmation lead)
+## Tracking (single-button flow)
+
+The page has **one CTA only**. Tapping it fires `Lead` and hands the visitor
+straight to Telegram — no confirmation popup, no second button, and no custom
+events.
 
 - `PageView` on page load
-- `TelegramCtaTap` (custom, **diagnostic only**) on every CTA tap — never
-  counted as a lead; exists only to measure accidental-tap volume
-- `Lead` fires **only when the user confirms** in the confirmation dialog —
-  exactly one event per confirmed user, once per browser. Ads Manager
-  "Website Leads" therefore counts confirmed intent, not accidental taps.
-  Same pixel ID, same event name, same URL as before, so running campaigns
-  and their learning phase are untouched.
+- `Lead` on the CTA tap, with `content_name` / `content_category` params, and
+  **once per browser** (`LEAD_ONCE_PER_BROWSER` in the script — set it to
+  `false` to count every tap). A stable `eventID` is stored per browser so a
+  future server-side Conversions API event can be deduplicated against it.
+- Removed: the old `TelegramCtaTap` diagnostic custom event and the
+  confirmation-dialog flow. `TelegramJoinClick` is **not** in this codebase —
+  if it appears in Events Manager it comes from another page or an older
+  cached version.
+
+Pixel ID, event name (`Lead`) and the Telegram URL are unchanged, so running
+campaigns and their learning phase are untouched.
 
 ## Conversion helpers
 
-- **Two-step confirmation lead:** tapping the CTA opens an on-page
-  confirmation dialog ("Haan, Telegram join karna hai" / "Nahi"); the Lead
-  event fires only on confirm, so accidental Reels/Story taps never enter
-  Ads Manager counts.
-- **Automatic in-app browser handoff:** after confirm, visitors inside the
-  Facebook / Instagram in-app browser (where `t.me` links often fail in a new
-  tab) are sent straight to Telegram in the same tab — zero extra taps.
-  Telegram's own page handles the app handoff from there.
+- **Handoff that never dead-ends:** mobile and in-app browser visitors
+  (Facebook, Instagram, Messenger, WhatsApp, TikTok, Snapchat, Google app,
+  Android WebView) go to Telegram in the same tab. Desktop visitors get a new
+  tab opened synchronously inside the tap gesture; if the browser blocks the
+  popup, the page falls back to same-tab navigation — the user always reaches
+  Telegram (previously a blocked popup silently did nothing while the Lead
+  event had already fired).
+- **300 ms pixel flush gap:** navigation happens 300 ms after the `Lead`
+  event (button shows "🔄 Telegram khol rahe hain…" and is disabled against
+  double taps) so the beacon leaves the page before the context is destroyed.
+- **`fbclid` / UTM capture:** click IDs are stored in `localStorage`
+  (`fb_click_v1`, Meta-standard `fbc` format) as groundwork for server-side
+  real-join attribution. No extra network call is made.
 - **Join-request expectation note** under the CTA tells users the admin
   approves requests, reducing confusion and repeat taps.
+
+> Note: the `Lead` event measures a CTA tap, not a completed Telegram join.
+> See `LEAD-DROP-REPORT.md` and `JOINING-ACCURACY.md` for the funnel analysis.
 
 ## Page structure (top to bottom)
 
