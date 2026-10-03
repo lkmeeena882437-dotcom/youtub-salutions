@@ -598,16 +598,25 @@
       }
     });
 
-    /* Tracking: exactly ONE Lead event per tap, once per browser.
-       (Custom duplicate event removed on purpose so Ads Manager numbers
-       stay 1 tap = 1 lead.) */
+    /* Tracking + Telegram handoff.
+       - Lead event: exactly ONE per confirmed tap, once per browser
+         (1 confirm tap = 1 Lead; accidental taps count nahi hote).
+       - Handoff: har browser me Telegram khule — in-app browser, mobile
+         aur desktop. Popup block ho jaye to same-tab fallback chalta hai,
+         warna pehle Lead count hoti thi aur user Telegram tak pahunchta
+         hi nahi tha (silent dead-end). */
     (function () {
       const TG_URL = 'https://t.me/+nZRxaOOdx2ozMGE1';
       const LEAD_KEY = 'tg_lead_v1';
+      const FLUSH_MS = 300; /* pixel beacon ko page chhodne ka chhota sa waqt */
+      const YES_LABEL = '✅ YES, JOIN FREE';
       let firedThisPage = false;
 
       const ua = navigator.userAgent || '';
-      const inAppBrowser = /FBAN|FBAV|FB_IAB|Instagram/i.test(ua);
+      /* FB / IG / Messenger / WhatsApp / TikTok / Snapchat / Google app /
+         Android WebView — in sab me naya tab bharosemand nahi hota. */
+      const inAppBrowser = /FBAN|FBAV|FB_IAB|FB4A|FBIOS|Instagram|Messenger|WhatsApp|Line\/|Snapchat|TikTok|Twitter|GSA\/|; wv\)|WebView/i.test(ua);
+      const isMobile = /Android|iPhone|iPad|iPod|Mobile|Opera Mini|IEMobile/i.test(ua);
 
       function alreadyTracked() {
         if (firedThisPage) return true;
@@ -619,6 +628,48 @@
       }
 
       const confirmModal = document.getElementById('confirmModal');
+      const confirmYes = document.getElementById('confirmYes');
+
+      function resetYesButton() {
+        if (!confirmYes) return;
+        confirmYes.disabled = false;
+        confirmYes.textContent = YES_LABEL;
+      }
+
+      /* Step 2: Lead fire hone ke baad asli handoff. */
+      function openTelegram() {
+        if (confirmYes) {
+          confirmYes.disabled = true;
+          confirmYes.textContent = '🔄 Telegram khol rahe hain…';
+        }
+        const goSameTab = () => { window.location.href = TG_URL; };
+
+        /* In-app aur mobile: same-tab handoff. Popup block ka sawaal hi
+           nahi, aur t.me khud Telegram app ko khol leta hai. */
+        if (inAppBrowser || isMobile) {
+          setTimeout(goSameTab, FLUSH_MS);
+          return;
+        }
+
+        /* Desktop: khali tab confirm-tap ke turant (synchronous) kholna
+           zaroori hai — setTimeout ke baad window.open browser block kar
+           deta hai. URL uske baad bharte hain. */
+        let win = null;
+        try { win = window.open('about:blank', '_blank'); } catch (e) { win = null; }
+        if (win && win.location) {
+          try { win.opener = null; } catch (e) {}
+          try {
+            win.document.body.innerHTML = '<p style="font:600 16px system-ui,sans-serif;padding:24px">Telegram khol rahe hain…</p>';
+          } catch (e) {}
+          setTimeout(() => {
+            try { win.location.href = TG_URL; } catch (e) { goSameTab(); }
+          }, FLUSH_MS);
+        } else {
+          /* Popup blocked → same tab me le jao. Isi case me pehle kuch
+             nahi hota tha: Lead count hoti thi, join nahi. */
+          setTimeout(goSameTab, FLUSH_MS);
+        }
+      }
 
       /* Step 1: CTA tap → confirmation dialog khulta hai.
          Galti se hue tap kabhi lead nahi bante.
@@ -629,23 +680,19 @@
         if (typeof window.fbq === 'function') {
           window.fbq('trackCustom', 'TelegramCtaTap');
         }
+        resetYesButton();
         confirmModal.classList.add('open');
       });
 
       /* Step 2: confirm tap → exactly ONE Lead event (once per browser),
          uske baad hi Telegram khulta hai. */
-      document.getElementById('confirmYes').addEventListener('click', () => {
+      confirmYes.addEventListener('click', () => {
         if (typeof window.fbq === 'function' && !alreadyTracked()) {
           markTracked();
           window.fbq('track', 'Lead');
         }
         confirmModal.classList.remove('open');
-        if (inAppBrowser) {
-          /* FB/IG in-app browser: same-tab handoff, koi extra tap nahi */
-          window.location.assign(TG_URL);
-        } else {
-          window.open(TG_URL, '_blank', 'noopener');
-        }
+        openTelegram();
       });
 
       document.getElementById('confirmNo').addEventListener('click', () => {

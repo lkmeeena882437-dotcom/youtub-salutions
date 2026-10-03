@@ -31,12 +31,21 @@ The advertising credit link is only a public attribution link. It has no Meta ev
   confirmation dialog ("Haan, Telegram join karna hai" / "Nahi"); the Lead
   event fires only on confirm, so accidental Reels/Story taps never enter
   Ads Manager counts.
-- **Automatic in-app browser handoff:** after confirm, visitors inside the
-  Facebook / Instagram in-app browser (where `t.me` links often fail in a new
-  tab) are sent straight to Telegram in the same tab — zero extra taps.
-  Telegram's own page handles the app handoff from there.
+- **Handoff that never dead-ends:** after confirm, mobile and in-app browser
+  visitors (Facebook, Instagram, Messenger, WhatsApp, TikTok, Snapchat,
+  Google app, Android WebView) are sent to Telegram in the same tab. Desktop
+  visitors get a new tab opened synchronously inside the tap gesture; if the
+  browser blocks the popup, the page falls back to same-tab navigation — the
+  user always reaches Telegram (previously a blocked popup silently did
+  nothing while the Lead event had already fired).
+- **300 ms pixel flush gap:** navigation happens 300 ms after the Lead event
+  (button shows "🔄 Telegram khol rahe hain…") so the beacon leaves the page
+  before the context is destroyed.
 - **Join-request expectation note** under the CTA tells users the admin
   approves requests, reducing confusion and repeat taps.
+
+> Note: the `Lead` event measures a *confirmed CTA tap*, not a completed
+> Telegram join. See `LEAD-DROP-REPORT.md` for the full funnel-drop analysis.
 
 ## Page structure (top to bottom)
 
